@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- toast -->
+    <string name="toast_no_Data">Datenmaterial unvollständig. Bitte Bischofshof_Admin aufrufen</string>
+
+    <!-- dirs -->
+    <string name="de">de/</string>
+    <string name="en">en/</string>
+    <string name="bischofshof_folder">/Bischofshof</string>
+    <string name="bischofshof_logo">/Bischofshof/Bischofshof/logo.jpg</string>
+    <string name="bischofshof_bg">/Bischofshof/Bischofshof/bischofshof_bg.jpg</string>
+    <string name="bischofshof_aktuelles">/Bischofshof/Bischofshof/Aktuelles/</string>
+    <string name="bischofshof_produkte_allgemeines">/Bischofshof/Bischofshof/Produkte/Allgemeines/</string>
+    <string name="bischofshof_produkte">/Bischofshof/Bischofshof/Produkte/Produkte/Produkte/</string>
+    <string name="bischofshof_produktion">/Bischofshof/Bischofshof/Produktion/</string>
+    <string name="bischofshof_unserTeam">/Bischofshof/Bischofshof/UnserTeam/</string>
+    <string name="weltenburg_logo">/Bischofshof/Weltenburg/logo.jpg</string>
+    <string name="weltenburg_bg">/Bischofshof/Weltenburg/weltenburg_bg.jpg</string>
+    <string name="weltenburg_aktuelles">/Bischofshof/Weltenburg/Aktuelles/</string>
+    <string name="weltenburg_aufNachWeltenburg">/Bischofshof/Weltenburg/AufNachWeltenburg/</string>
+    <string name="weltenburg_aufNachWeltenburg_Logos">/Bischofshof/Weltenburg/AufNachWeltenburg/logos/</string>
+    <string name="weltenburg_aufNachWeltenburg_Auto">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/auto/</string>
+    <string name="weltenburg_aufNachWeltenburg_Fuss">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/fuss/</string>
+    <string name="weltenburg_aufNachWeltenburg_Rad">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/rad/</string>
+    <string name="weltenburg_aufNachWeltenburg_Schiff">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/schiff/</string>
+    <string name="weltenburg_geschichte">/Bischofshof/Weltenburg/Geschichte/Geschichte/</string>
+    <string name="weltenburg_geschichte_allgemeines">/Bischofshof/Weltenburg/Geschichte/Allgemeines/</string>
+    <string name="weltenburg_produkte">/Bischofshof/Weltenburg/Produkte/Produkte/</string>
+    <string name="weltenburg_produkte_allgemeines">/Bischofshof/Weltenburg/Produkte/Allgemeines/</string>
+
+    <!-- Menü -->
+    <string name="settings">Einstellungen</string>
+    <string name="refresh">Aktualisieren</string>
+
+</resources>

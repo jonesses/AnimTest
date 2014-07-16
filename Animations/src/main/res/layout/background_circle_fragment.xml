@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/background_circle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:clickable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bierdeckel"
+        android:visibility="visible"
+        app:corner_radius="300dp"
+        app:oval="false" />
+
+    <ImageView
+        android:id="@+id/background_shadow_circle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:background="@drawable/transp_shadow_circle"
+         />
+
+</FrameLayout>

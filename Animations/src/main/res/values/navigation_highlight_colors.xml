@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--WELTENBURG-->
+    <color name="weltenburg_blue_dark">#ff203969</color>
+    <color name="weltenburg_blue_med">#ff225569</color>
+    <color name="weltenburg_blue_light">#ff1e6966</color>
+    <color name="weltenburg_green_med">#ff1d694a</color>
+    <color name="weltenburg_green_light">#ff1f6934</color>
+</resources>
