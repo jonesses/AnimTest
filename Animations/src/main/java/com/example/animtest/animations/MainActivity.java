@@ -119,7 +119,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         startScreen.setFragmentInteractionListener(this);
         geschichteAllgemeinesFragment.setOnFragmentInteractionListener(this);
 
-       // supportFragmentManager.beginTransaction().add(R.id.frame, geschichteFragment).hide(geschichteFragment).commit();
+        // supportFragmentManager.beginTransaction().add(R.id.frame, geschichteFragment).hide(geschichteFragment).commit();
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction
@@ -128,7 +128,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                 .add(R.id.frame, backgroundCircle)//.hide(backgroundCircle)
                 .add(R.id.frame, ausflugFragment).hide(ausflugFragment)
 
-                        // .add(R.id.frame, ausflugFussFragment).hide(ausflugFussFragment)
+                // .add(R.id.frame, ausflugFussFragment).hide(ausflugFussFragment)
 //                .add(R.id.frame, ausflugSchiffFragment).hide(ausflugSchiffFragment)
 //                .add(R.id.frame, ausflugRadFragment).hide(ausflugRadFragment)
 //                .add(R.id.frame, ausflugAutoFragment).hide(ausflugAutoFragment)
@@ -149,13 +149,13 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     @Override
     public void onTransitionToFullscreenRequested() {
-        fragmentManager.beginTransaction()
-                .hide(leftSide)
+        FragmentTransaction fullscreenTransaction =  fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        fullscreenTransaction.hide(leftSide)
                 .hide(rightSide)
                 .hide(geschichteAllgemeinesFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
         backgroundCircle.expandToFullscreen(this);
+
     }
 
     @Override
@@ -202,7 +202,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     @Override
     public void onAnimationEnd(Animator animator) {
         supportFragmentManager.beginTransaction()
-                .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
                 .add(R.id.frame, geschichteFragment)
                 .commit();
     }
