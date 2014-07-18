@@ -20,7 +20,7 @@ import de.ur.mi.projektion.bischofshof.AnimationConstants;
  */
 public class AnimationHelper {
 
-    public static void backgroundCircleShow(RoundedImageView backgroundCircle) {
+    public static void backgroundCircleShow(ImageView backgroundCircle) {
         backgroundCircle.setScaleX(3f);
         backgroundCircle.setScaleY(3f);
         backgroundCircle.setTranslationX(600);
@@ -80,45 +80,46 @@ public class AnimationHelper {
         backgroundFadeOut.start();
     }
 
-    public static void startTransitionToFullscreenAnimation(RoundedImageView backgroundCircle, Animator.AnimatorListener listener) {
-        ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 0f);
-        ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 3.8f);
-        ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 3.8f);
-        ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 0.2f);
-        backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+    public static void startTransitionToFullscreenAnimation(ImageView backgroundCircle, Animator.AnimatorListener animatorListener) {
+        //ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 0f);
+        ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 5.7f);
+        ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 5.7f);
+      //  ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 0.2f);
+      //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
         backgroundScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
         backgroundScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
-        backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
+       // backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
 
-        backgroundFade.setStartDelay(AnimationConstants.ANIMATION_DURATION * 4);
-        backgroundScaleX.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
-        backgroundScaleY.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
+//        backgroundFade.setStartDelay(AnimationConstants.ANIMATION_DURATION * 4);
+//        backgroundScaleX.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
+//        backgroundScaleY.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
 
-        backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
+       // backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
 
         AnimatorSet set = new AnimatorSet();
-        set.playTogether(backgroundMove, backgroundScaleX, backgroundScaleY);
-        set.addListener(listener);
+        set.addListener(animatorListener);
+        set.playTogether(backgroundScaleX, backgroundScaleY);
         set.start();
 
 
     }
 
-    public static void startTransitionFromFullscreenAnimation(RoundedImageView backgroundCircle) {
+    public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, Animator.AnimatorListener animatorListener) {
 
-        ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
+       // ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 3f);
         ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 3f);
-        ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 1f);
-        backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+       // ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 1f);
+      //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         backgroundScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         backgroundScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
-        backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+        //backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
 
-        backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
+        //backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
 
         AnimatorSet set = new AnimatorSet();
-        set.playTogether(backgroundMove, backgroundScaleX, backgroundScaleY, backgroundFade);
+        set.addListener(animatorListener);
+        set.playTogether(backgroundScaleX, backgroundScaleY);
         set.start();
 
 

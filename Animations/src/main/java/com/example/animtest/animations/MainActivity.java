@@ -113,11 +113,13 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         ausflugFragment = new AuflugFragment();
         geschichteFragment = new WeltenburgGeschichteFragment();
 
+
         leftSide.setFragmentInteractionListener(this);
         rightSide.setFragmentInteractionListener(this);
         leftSide.setCategorySelectedListener(this);
         startScreen.setFragmentInteractionListener(this);
         geschichteAllgemeinesFragment.setOnFragmentInteractionListener(this);
+        geschichteFragment.setFragmentInteractionListener(this);
 
         // supportFragmentManager.beginTransaction().add(R.id.frame, geschichteFragment).hide(geschichteFragment).commit();
 
@@ -149,12 +151,34 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     @Override
     public void onTransitionToFullscreenRequested() {
-        FragmentTransaction fullscreenTransaction =  fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        backgroundCircle.expandToFullscreen(this);
+        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         fullscreenTransaction.hide(leftSide)
                 .hide(rightSide)
                 .hide(geschichteAllgemeinesFragment)
                 .commit();
-        backgroundCircle.expandToFullscreen(this);
+
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
+                .add(R.id.frame, geschichteFragment)
+                .commit();
+
+    }
+
+    @Override
+    public void onTransitionFromFullscreenRequested() {
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
+                .remove(geschichteFragment)
+                .commit();
+
+        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        fullscreenTransaction.show(leftSide)
+                .show(rightSide)
+                .show(geschichteAllgemeinesFragment)
+                .commit();
+
+        backgroundCircle.shrinkFromFullscreen(this);
 
     }
 
@@ -201,10 +225,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     @Override
     public void onAnimationEnd(Animator animator) {
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
-                .add(R.id.frame, geschichteFragment)
-                .commit();
+
     }
 
     @Override
@@ -220,11 +241,11 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     @Override
     public void onCategoryChangeRequested(int category) {
-
+        FragmentTransaction transaction = fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         switch (category) {
             case CategoryConstants.CATEGORY_AKTUELLES:
-                fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transaction
                         .hide(ausflugFussFragment)
                         .hide(ausflugSchiffFragment)
                         .hide(ausflugRadFragment)
@@ -235,8 +256,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_GESCHICHTE:
-                fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transaction
                         .hide(ausflugFussFragment)
                         .hide(ausflugSchiffFragment)
                         .hide(ausflugRadFragment)
@@ -247,8 +267,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_PRODUKTE:
-                fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transaction
                         .hide(ausflugFussFragment)
                         .hide(ausflugSchiffFragment)
                         .hide(ausflugRadFragment)
@@ -259,8 +278,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_AUSFLUG:
-                fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transaction
                         .show(ausflugFragment)
                         .hide(ausflugSchiffFragment)
                         .hide(ausflugRadFragment)

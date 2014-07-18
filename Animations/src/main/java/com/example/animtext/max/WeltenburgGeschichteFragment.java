@@ -15,11 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 
+import com.example.animtest.animations.MainActivity;
 import com.example.animtest.animations.R;
 import com.example.animtest.raphael.BischofshofApplikation;
 import com.example.animtest.raphael.Geschichte;
 
 import java.util.ArrayList;
+
+import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 
 
 /**
@@ -47,8 +50,10 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
     private int firstButtonId; // interne Id des ersten Buttons, drauffolgenden
                                 // sind immer +1
     private boolean scrollInForLoop = false;
+    private Button backButton;
 
-    View v; 
+    View v;
+    private OnFragmentInteractionListener interactionListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {        
@@ -58,7 +63,16 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
 
         return v;
     }
-    
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+       super.onHiddenChanged(hidden);
+       if(!hidden) {
+           initData();
+       }
+
+    }
+
     private void initData(){
 
         referenceClasses();
@@ -233,6 +247,13 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
     }
 
     private void referenceUIElements() {
+        v.findViewById(R.id.buttonBack).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interactionListener.onTransitionFromFullscreenRequested();
+            }
+        });
+
         sv = (HorizontalScrollView) v.findViewById(R.id.timeLine);
         mPager = (KKViewPager) v.findViewById(R.id.kk_pager);
         p = new Point();
@@ -333,5 +354,9 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
     @Override
     public void onPageSelected(int arg0) {
         mPager.getReadyWithNextTwoView(arg0);
+    }
+
+    public void setFragmentInteractionListener(OnFragmentInteractionListener interactionListener) {
+        this.interactionListener = interactionListener;
     }
 }

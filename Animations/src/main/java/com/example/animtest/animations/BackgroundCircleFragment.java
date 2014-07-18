@@ -21,7 +21,7 @@ public class BackgroundCircleFragment extends Fragment {
     private View v;
     private ViewGroup container;
     private Activity activity;
-    private RoundedImageView backgroundCircle;
+    private ImageView backgroundCircle;
     private ImageView shadow;
 
 
@@ -45,7 +45,7 @@ public class BackgroundCircleFragment extends Fragment {
     }
 
     public void show() {
-        backgroundCircle = (RoundedImageView) v.findViewById(R.id.background_circle);
+        backgroundCircle = (ImageView) v.findViewById(R.id.background_circle);
 
 
         AnimationHelper.backgroundCircleShow(backgroundCircle);
@@ -60,6 +60,10 @@ public class BackgroundCircleFragment extends Fragment {
     public void expandToFullscreen(Animator.AnimatorListener listener){
         AnimationHelper.startTransitionToFullscreenAnimation(backgroundCircle, listener);
 
+    }
+
+    public void shrinkFromFullscreen(Animator.AnimatorListener listener){
+        AnimationHelper.startTransitionFromFullscreenAnimation(backgroundCircle, listener);
     }
 
 
