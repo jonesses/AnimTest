@@ -1,16 +1,15 @@
 package com.example.animtest.raphael;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 public class BischofshofClasses{	
 	
@@ -47,6 +46,21 @@ public class BischofshofClasses{
 		}
 		return myFiles;
 	}
+	
+	public ArrayList<BitmapItem> getProdukte(String string, Context mContext) {
+		ArrayList<BitmapItem> items = new ArrayList<BitmapItem>();
+		ArrayList<String> myFiles = getPngFilesInDir(string, mContext);
+		Bitmap currentBitmap;
+		
+		for(int i = 0; i < myFiles.size(); i++){
+			currentBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+string+myFiles.get(i));
+			items.add(new BitmapItem((myFiles.get(i).substring(0, myFiles.get(i).length() - 4)),currentBitmap));
+		}	
+		
+		return items;
+	}
+	
+	
 	
 	public ArrayList<String> getTextFilesInDir(String dir, Context mContext) {
 		ArrayList<String> myFiles = new ArrayList<String>();

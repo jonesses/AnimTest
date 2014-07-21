@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialog_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/header" />
+
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_image_header"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/content_white" />
+
+    <ImageView
+        android:id="@+id/dialog_image_bottom"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_text"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nav" />
+
+    <ImageView
+        android:id="@+id/dialog_image_header"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/dialog_image_bottom"
+        android:layout_below="@+id/dialog_header"
+        android:src="@drawable/nav" />
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:pj="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bierdeckel">
+    
+   <LinearLayout
+        android:id="@+id/backLayoutProdukte"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/tvBackLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Zurück"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+    	android:layout_weight="0.5"
+    	android:padding="5dip"
+    	android:gravity="top"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"	>
+	    
+			<com.example.animtest.raphael.Carousel
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"	
+			    android:id="@+id/carousel"  
+			    pj:UseReflection="true"
+			    pj:Items="@array/entries"
+			    pj:Names="@array/names" 
+			    pj:SelectedItem="0"
+			    android:animationDuration="200"/>    	
+	</LinearLayout>    	
+</LinearLayout>

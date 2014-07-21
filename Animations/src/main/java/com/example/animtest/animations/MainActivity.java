@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,16 +32,18 @@ import com.example.animtest.raphael.Logos;
 import com.example.animtest.raphael.Produkte;
 import com.example.animtest.raphael.ProdukteAllgemeinesFragment;
 import com.example.animtest.raphael.StringItem;
+import com.example.animtest.raphael.WeltenburgProdukteFragment;
 import com.example.animtext.max.WeltenburgGeschichteFragment;
 
 import java.util.ArrayList;
 
 import de.ur.mi.projektion.bischofshof.CategoryConstants;
+import de.ur.mi.projektion.bischofshof.listeners.OnAnimationListener;
 import de.ur.mi.projektion.bischofshof.listeners.OnCategorySelectedListener;
 import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 
 
-public class MainActivity extends FragmentActivity implements OnFragmentInteractionListener, OnCategorySelectedListener, Animator.AnimatorListener {
+public class MainActivity extends FragmentActivity implements OnFragmentInteractionListener, OnCategorySelectedListener, Animator.AnimatorListener, OnAnimationListener {
 
 
     private FragmentManager fragmentManager;
@@ -68,6 +71,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     private ArrayList<Produkte> weltenburg_produkte;
     private ArrayList<Logos> weltenburg_aufNachWeltenburg_logos;
     private android.support.v4.app.FragmentManager supportFragmentManager;
+    private WeltenburgProdukteFragment produkteFragment;
 
 
     @Override
@@ -103,6 +107,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         rightSide = new RightSideFragment();
         backgroundCircle = new BackgroundCircleFragment();
         aktuellesFragment = new AktuellesFragment();
+        produkteFragment = new WeltenburgProdukteFragment();
 
         ausflugAutoFragment = new AusflugAutoFragmen();
         ausflugFussFragment = new AusflugFussFragment();
@@ -129,16 +134,14 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                 .add(R.id.frame, leftSide)//.hide(leftSide)
                 .add(R.id.frame, backgroundCircle)//.hide(backgroundCircle)
                 .add(R.id.frame, ausflugFragment).hide(ausflugFragment)
-
-                // .add(R.id.frame, ausflugFussFragment).hide(ausflugFussFragment)
-//                .add(R.id.frame, ausflugSchiffFragment).hide(ausflugSchiffFragment)
-//                .add(R.id.frame, ausflugRadFragment).hide(ausflugRadFragment)
-//                .add(R.id.frame, ausflugAutoFragment).hide(ausflugAutoFragment)
                 .add(R.id.frame, geschichteAllgemeinesFragment).hide(geschichteAllgemeinesFragment)
                 .add(R.id.frame, produkteAllgemeinesFragment).hide(produkteAllgemeinesFragment)
                 .add(R.id.frame, aktuellesFragment)//.hide(aktuellesFragment)
+                .add(R.id.frame, produkteFragment).hide(produkteFragment)
                 .add(R.id.frame, startScreen)
                 .commit();
+
+        supportFragmentManager.beginTransaction().add(R.id.frame, geschichteFragment).hide(geschichteFragment).commit();
 
 
     }
@@ -158,10 +161,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                 .hide(geschichteAllgemeinesFragment)
                 .commit();
 
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
-                .add(R.id.frame, geschichteFragment)
-                .commit();
 
     }
 
@@ -169,7 +168,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     public void onTransitionFromFullscreenRequested() {
         supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
-                .remove(geschichteFragment)
+                .hide(geschichteFragment)
                 .commit();
 
         FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
@@ -179,6 +178,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                 .commit();
 
         backgroundCircle.shrinkFromFullscreen(this);
+
 
     }
 
@@ -292,7 +292,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     private void getWeltenburgData() {
         //Aktuelles
-        weltenburg_aktuelles = getGeneralContent(this.getString(R.string.weltenburg_aktuelles));
+        weltenburg_aktuelles = getGeneralContent(getString(R.string.weltenburg_aktuelles));
         app.setWeltenburgAktuelles(weltenburg_aktuelles);
         //Produkte Allgemeines
         weltenburg_produkte_allgemeines = getGeneralContent(this.getString(R.string.weltenburg_produkte_allgemeines));
@@ -323,19 +323,19 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         app.setWeltenburgAufNachWeltenburgSchiff(weltenburg_route);
     }
 
-    private ArrayList<Logos> getLogos(String string) {
+    private ArrayList<Logos> getLogos(String string){
         ArrayList<Logos> logos = new ArrayList<Logos>();
         ArrayList<BitmapItem> bitmapItems;
         Bitmap currentBitmap;
         ArrayList<StringItem> deTextItems;
 
         bitmapItems = classes.getLogos(string, this);
-        deTextItems = classes.getTextItems(string + this.getString(R.string.de), this);
+        deTextItems = classes.getTextItems(string+this.getString(R.string.de), this);
 
-        for (int i = 0; i < deTextItems.size(); i++) {
+        for(int i = 0; i < deTextItems.size(); i++){
             currentBitmap = null;
-            for (int m = 0; m < bitmapItems.size(); m++) {
-                if (bitmapItems.get(m).getId().equals(deTextItems.get(i).getId() + "")) {
+            for(int m = 0; m < bitmapItems.size(); m++){
+                if(bitmapItems.get(m).getId().equals(deTextItems.get(i).getId()+"")){
                     currentBitmap = bitmapItems.get(m).getBitmap();
                 }
             }
@@ -345,26 +345,26 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         return logos;
     }
 
-    private ArrayList<Geschichte> getGeschichte(String string) {
+    private ArrayList<Geschichte> getGeschichte(String string){
         ArrayList<Geschichte> geschichte = new ArrayList<Geschichte>();
         ArrayList<BitmapItem> bitmapItems;
         Bitmap currentBitmap;
         ArrayList<StringItem> deTextItems;
 
         bitmapItems = classes.getBitmapItems(string, this);
-        deTextItems = classes.getTextItems(string + this.getString(R.string.de), this);
+        deTextItems = classes.getTextItems(string+this.getString(R.string.de), this);
 
-        if (bitmapItems != null && deTextItems != null) {
-            for (int i = 0; i < deTextItems.size(); i++) {
+        if(bitmapItems!=null&&deTextItems!=null){
+            for(int i = 0; i < deTextItems.size(); i++){
                 currentBitmap = null;
-                for (int m = 0; m < bitmapItems.size(); m++) {
-                    if (bitmapItems.get(m).getId().equals(deTextItems.get(i).getId() + "")) {
+                for(int m = 0; m < bitmapItems.size(); m++){
+                    if(bitmapItems.get(m).getId().equals(deTextItems.get(i).getId()+"")){
                         currentBitmap = bitmapItems.get(m).getBitmap();
                     }
                 }
                 geschichte.add(new Geschichte(currentBitmap, deTextItems.get(i).getStringItem(), deTextItems.get(i).getId()));
             }
-        } else {
+        }else{
             Log.e(this.getClass().getName(), string);
         }
 
@@ -373,29 +373,22 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
     private ArrayList<Produkte> getProdukte(String string) {
         ArrayList<Produkte> produkte = new ArrayList<Produkte>();
-        ArrayList<Bitmap> aktuelleBitmaps = new ArrayList<Bitmap>();
-        ArrayList<String> files = new ArrayList<String>();
+        ArrayList<BitmapItem> bitmapItems;
         ArrayList<String> deTexts = new ArrayList<String>();
-        Bitmap currentBitmap;
 
-        files = classes.getPngFilesInDir(string, this);
-        if (files != null) {
-            for (int i = 0; i < files.size(); i++) {
-                currentBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + string + files.get(i));
-                aktuelleBitmaps.add(currentBitmap);
-            }
-        }
-        deTexts = classes.getTextFiles(string + this.getString(R.string.de), this);
+        bitmapItems = classes.getProdukte(string, this);
+        deTexts = classes.getTextFiles(string+this.getString(R.string.de), this);
 
-        if (deTexts != null) {
-            if (aktuelleBitmaps.size() == deTexts.size()) {
-                for (int i = 0; i < aktuelleBitmaps.size(); i++) {
-                    produkte.add(new Produkte(aktuelleBitmaps.get(i), deTexts.get(i)));
+
+        if(deTexts!=null){
+            if(bitmapItems.size()==deTexts.size()){
+                for(int i = 0; i < bitmapItems.size(); i++){
+                    produkte.add(new Produkte(bitmapItems.get(i).getBitmap(), deTexts.get(i), bitmapItems.get(i).getId()));
                 }
-            } else {
+            }else{
                 Log.e(this.getClass().getName(), string);
             }
-        } else {
+        }else{
             Log.e(this.getClass().getName(), string);
         }
 
@@ -409,36 +402,36 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         String header = "", subHeader = "", content = "";
 
         ArrayList<String> files = classes.getJpgFilesInDir(string, this);
-        if (files != null) {
-            for (int i = 0; i < files.size(); i++) {
-                currentBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + string + files.get(i));
+        if(files!=null){
+            for(int i = 0; i < files.size(); i++){
+                currentBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+string+files.get(i));
                 bitmapItems.add(new BitmapItem(files.get(i), currentBitmap));
             }
         }
 
-        String deText = classes.getTextInDir(string + this.getString(R.string.de), this);
+        String deText = classes.getTextInDir(string+this.getString(R.string.de), this);
         String[] strings = deText.split("\n");
 
-        for (int i = 0; i < strings.length; i++) {
-            if (strings[i].contains("<h1>") && strings[i].contains("</h1>")) {
-                header = strings[i].replaceAll("\\<[^>]*>", "");
-            } else if (strings[i].contains("<h2>") && strings[i].contains("</h2>")) {
-                if (content.length() < 5) {
-                    subHeader = strings[i].replaceAll("\\<[^>]*>", "");
-                } else {
+        for(int i = 0; i < strings.length; i++){
+            if(strings[i].contains("<h1>")&&strings[i].contains("</h1>")){
+                header = strings[i].replaceAll("\\<[^>]*>","");
+            }else if(strings[i].contains("<h2>")&&strings[i].contains("</h2>")){
+                if(content.length()<5){
+                    subHeader = strings[i].replaceAll("\\<[^>]*>","");
+                }else{
                     articles.add(new Article(subHeader, currentBitmap, content));
-                    subHeader = strings[i].replaceAll("\\<[^>]*>", "");
+                    subHeader = strings[i].replaceAll("\\<[^>]*>","");
                     content = "";
                     currentBitmap = null;
                 }
-            } else if (strings[i].contains("<img")) {
-                for (int m = 0; m < bitmapItems.size(); m++) {
-                    if (strings[i].contains(bitmapItems.get(m).getId())) {
+            }else if(strings[i].contains("<img")){
+                for(int m = 0; m < bitmapItems.size(); m++){
+                    if(strings[i].contains(bitmapItems.get(m).getId())){
                         currentBitmap = bitmapItems.get(m).getBitmap();
                     }
                 }
-            } else {
-                content += "\n" + strings[i].replaceAll("\\<[^>]*>", "");
+            }else{
+                content += "\n"+strings[i].replaceAll("\\<[^>]*>","");
             }
         }
         articles.add(new Article(subHeader, currentBitmap, content));
@@ -453,9 +446,31 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         weltenburg_produkte = new ArrayList<Produkte>();
     }
 
-
     private void getLogos() {
-        weltenburg_logo = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + this.getString(R.string.weltenburg_logo));
+        weltenburg_logo = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+this.getString(R.string.weltenburg_logo));
         app.setWeltenburgLogo(weltenburg_logo);
+    }
+
+    @Override
+    public void onToFullscreenStarted() {
+
+    }
+
+    @Override
+    public void onToFullscreenFinished() {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .show(produkteFragment)
+                .commit();
+    }
+
+    @Override
+    public void onFromFullscreenStarted() {
+
+    }
+
+    @Override
+    public void onFromFullscreenFinished() {
+
     }
 }

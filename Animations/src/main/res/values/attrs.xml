@@ -10,11 +10,5 @@
 		<attr name="minQuantity" format="integer"/>
 		<attr name="maxQuantity" format="integer"/>
 		<attr name="Names" format="string" />
-	</declare-styleable>
-	<declare-styleable name="ParallaxScroll">
-        <attr name="parallax_factor" format="float" />
-        <attr name="inner_parallax_factor" format="float" />
-        <attr name="parallax_views_num" format="integer" />
-        <attr name="circular_parallax" format="boolean" />
-    </declare-styleable>	
+	</declare-styleable>	
 </resources>

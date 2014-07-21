@@ -1,5 +1,6 @@
 package com.example.animtext.max;
 
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.animtest.raphael.Geschichte;
-
-import java.util.ArrayList;
 
 
 public class TestFragmentAdapter extends FragmentStatePagerAdapter {

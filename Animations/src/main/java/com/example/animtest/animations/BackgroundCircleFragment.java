@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.makeramen.RoundedImageView;
 
 import de.ur.mi.bischofshof.helpers.AnimationHelper;
+import de.ur.mi.projektion.bischofshof.listeners.OnAnimationListener;
 
 /**
  * Created by Jonas on 03.07.2014.
@@ -57,12 +58,12 @@ public class BackgroundCircleFragment extends Fragment {
         AnimationHelper.animateShadowOptionSelected(shadow, color);
 
     }
-    public void expandToFullscreen(Animator.AnimatorListener listener){
+    public void expandToFullscreen(OnAnimationListener listener){
         AnimationHelper.startTransitionToFullscreenAnimation(backgroundCircle, listener);
 
     }
 
-    public void shrinkFromFullscreen(Animator.AnimatorListener listener){
+    public void shrinkFromFullscreen(OnAnimationListener listener){
         AnimationHelper.startTransitionFromFullscreenAnimation(backgroundCircle, listener);
     }
 

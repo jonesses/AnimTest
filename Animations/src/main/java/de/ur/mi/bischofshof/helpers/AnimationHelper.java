@@ -14,6 +14,7 @@ import com.example.animtest.animations.R;
 import com.makeramen.RoundedImageView;
 
 import de.ur.mi.projektion.bischofshof.AnimationConstants;
+import de.ur.mi.projektion.bischofshof.listeners.OnAnimationListener;
 
 /**
  * Created by Jonas on 14.06.2014.
@@ -80,7 +81,7 @@ public class AnimationHelper {
         backgroundFadeOut.start();
     }
 
-    public static void startTransitionToFullscreenAnimation(ImageView backgroundCircle, Animator.AnimatorListener animatorListener) {
+    public static void startTransitionToFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener) {
         //ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 0f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 5.7f);
         ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 5.7f);
@@ -97,14 +98,34 @@ public class AnimationHelper {
        // backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
 
         AnimatorSet set = new AnimatorSet();
-        set.addListener(animatorListener);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                animatorListener.onToFullscreenStarted();
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                animatorListener.onToFullscreenFinished();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         set.playTogether(backgroundScaleX, backgroundScaleY);
         set.start();
 
 
     }
 
-    public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, Animator.AnimatorListener animatorListener) {
+    public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener) {
 
        // ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 3f);
@@ -118,7 +139,27 @@ public class AnimationHelper {
         //backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
 
         AnimatorSet set = new AnimatorSet();
-        set.addListener(animatorListener);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                animatorListener.onFromFullscreenStarted();
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                animatorListener.onFromFullscreenFinished();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         set.playTogether(backgroundScaleX, backgroundScaleY);
         set.start();
 

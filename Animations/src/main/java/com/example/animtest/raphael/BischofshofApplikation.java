@@ -1,9 +1,8 @@
 package com.example.animtest.raphael;
 
+import java.util.ArrayList;
 import android.app.Application;
 import android.graphics.Bitmap;
-
-import java.util.ArrayList;
 
 public class BischofshofApplikation extends Application {
 

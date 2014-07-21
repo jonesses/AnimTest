@@ -1,5 +1,10 @@
 package com.example.animtext.max;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+import com.nineoldandroids.view.ViewHelper;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Camera;
@@ -7,6 +12,7 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -15,16 +21,11 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.nineoldandroids.view.ViewHelper;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
 public class KKViewPager extends ViewPager {
 
 	private boolean isFirstTime = true;
 	public int mCenterX;
-	public int mCenterY;
+	public int mCenterY = 50;
 	private Point mPoint;
 	private Display mDisplay;
 	private boolean mEnabled = true;
@@ -44,7 +45,7 @@ public class KKViewPager extends ViewPager {
 
 	public KKViewPager(Context context) {
 		this(context, null);
-	}
+	}	
 
 	public KKViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -156,7 +157,7 @@ public class KKViewPager extends ViewPager {
 	public void onPageScrolled(int position, float positionOffset,
 			int positionOffsetPixels) {
 		
-//		Log.d("args", "postion: "+position+" positionsOffset: "+ positionOffset +" positionOffsetPixels: "+positionOffsetPixels);
+		//Log.d("args", "postion: "+position+" positionsOffset: "+ positionOffset +" positionOffsetPixels: "+positionOffsetPixels);
 
 		if (mState == State.IDLE && positionOffset > 0) {
 			oldPage = getCurrentItem();
@@ -191,8 +192,6 @@ public class KKViewPager extends ViewPager {
 	}
 	
 	public void scrollPage() {
-		mState = State.GOING_RIGHT;
-		Log.d("KK", "scroll page " + State.GOING_RIGHT);
 	}
 
 	private boolean isSmall(float positionOffset) {
@@ -232,12 +231,12 @@ public class KKViewPager extends ViewPager {
 		if (isFirstTime) {
 			isFirstTime = false;
 			update();
-			hack();
+//			hack();
 		}
 	}
 
 	public void update() {
-		int size = getAdapter().getCount();
+		int size = 17;
 		if (size >= 3)
 			for (int i = 1; i < 3; i++) {
 				View l = findViewFromObject(i);
@@ -251,6 +250,39 @@ public class KKViewPager extends ViewPager {
 			}
 
 	}
+	
+	public void scrollOneLeft(){
+		MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_DOWN, 200, 100, 0);
+		MotionEvent motionEvent2 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_MOVE, 1200, 100, 0);
+		MotionEvent motionEvent3 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_UP, 200, 100, 0);
+		this.dispatchTouchEvent(motionEvent);
+		this.dispatchTouchEvent(motionEvent2);
+		this.dispatchTouchEvent(motionEvent3);
+	}
+	
+	public void scrollOneRight(){
+		/*MotionEvent event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, (2*mCenterX)-300, mCenterY, 0);
+		this.dispatchTouchEvent(event);
+		event.recycle();
+		
+		//for(int i = 100; i <= ((2*mCenterX)-350); i+=29){
+		for(int i = 110; i <= ((2*mCenterX)-350); i+=29){
+			event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE,	((2*mCenterX)-300)-i, mCenterY, 0);
+			this.dispatchTouchEvent(event);
+			event.recycle();
+		}		
+		
+		event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 50, mCenterY, 0);
+		this.dispatchTouchEvent(event);
+		event.recycle();*/	
+		Log.e(this.getClass().getName(), "Scrolled");
+		MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_DOWN, 1200, 100, 0);
+		MotionEvent motionEvent2 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_MOVE, 200, 100, 0);
+		MotionEvent motionEvent3 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_UP, 1200, 100, 0);
+		this.dispatchTouchEvent(motionEvent);
+		this.dispatchTouchEvent(motionEvent2);
+		this.dispatchTouchEvent(motionEvent3);
+	}
 
 	public void hack() {
 		
@@ -262,7 +294,6 @@ public class KKViewPager extends ViewPager {
 			event.recycle();
 
 			for (int i = 0; i >= -15; i--) {
-
 				event = MotionEvent.obtain(SystemClock.uptimeMillis(),
 						SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE,
 						mCenterX + ((mPoint.x * i) / 100), mCenterY, 0);
@@ -345,6 +376,6 @@ public class KKViewPager extends ViewPager {
 		mPoint = new Point();
 		mDisplay.getSize(mPoint);
 		mCenterX = mPoint.x / 2;
-		mCenterY = mPoint.y / 2;
+		mCenterY = 150;
 	}
 }
