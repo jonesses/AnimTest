@@ -1,4 +1,4 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.animtest.animations.R;
+import com.example.animtest.raphael.Logos;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Jonas (Bitch!!!) on 08.07.2014.
  */
-public class AuflugFragment extends Fragment {
+public class AusflugFragment extends Fragment {
     private View v; 
     private ArrayList<Logos> weltenburg_aufNachWeltenburg_logos;
     private TextView textView1, textView2, textView3, textView4;

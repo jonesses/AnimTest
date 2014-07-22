@@ -8,7 +8,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:name="com.example.animtest.raphael.BischofshofApplikation"
+        android:name="de.ur.mi.ux.weltenburg.fragments.BischofshofApplikation"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
         android:persistent="true"

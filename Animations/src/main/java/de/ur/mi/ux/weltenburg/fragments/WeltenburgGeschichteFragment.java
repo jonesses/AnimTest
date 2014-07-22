@@ -1,4 +1,4 @@
-package com.example.animtext.max;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import java.util.ArrayList;
 
@@ -21,8 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.animtest.animations.R;
-import com.example.animtest.raphael.BischofshofApplikation;
 import com.example.animtest.raphael.Geschichte;
+import com.example.animtext.max.KKViewPager;
+import com.example.animtext.max.TestFragmentAdapter;
 
 import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 
@@ -245,7 +246,7 @@ public class WeltenburgGeschichteFragment extends Fragment implements ViewPager.
 
         Log.e(this.getClass().getName(), scrollingByUser + " - "+scrollFactor);
 
-		sv.smoothScrollBy(scrollingByUser+(scrollFactor*300), 0);
+		sv.smoothScrollBy(scrollingByUser + (scrollFactor * 300), 0);
 		
 		currentTimelinePos = newPos;
 		setTimelineButtonSelected(currentTimelinePos);	

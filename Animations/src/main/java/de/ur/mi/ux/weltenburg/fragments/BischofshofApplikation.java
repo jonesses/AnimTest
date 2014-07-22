@@ -1,8 +1,13 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import java.util.ArrayList;
 import android.app.Application;
 import android.graphics.Bitmap;
+
+import com.example.animtest.raphael.GeneralContent;
+import com.example.animtest.raphael.Geschichte;
+import com.example.animtest.raphael.Logos;
+import com.example.animtest.raphael.Produkte;
 
 public class BischofshofApplikation extends Application {
 

@@ -1,4 +1,4 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.animtest.animations.R;
+import com.example.animtest.raphael.ListViewAdapterArticles;
 
 
 /**
  * Created by Jonas (Bitch!!!) on 08.07.2014.
  */
-public class AusflugAutoFragmen extends Fragment {
+public class AusflugAutoFragment extends Fragment {
     View v; 
 
     @Override

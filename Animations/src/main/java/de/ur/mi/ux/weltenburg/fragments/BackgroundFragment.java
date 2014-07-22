@@ -1,4 +1,4 @@
-package com.example.animtest.animations;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.animtest.animations.R;
 
 /**
  * Created by Jonas on 17.06.2014.

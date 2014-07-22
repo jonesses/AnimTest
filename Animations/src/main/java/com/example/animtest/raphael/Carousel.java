@@ -11,6 +11,7 @@ import android.graphics.Camera;
 import android.graphics.Matrix;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -20,6 +21,8 @@ import android.view.animation.Transformation;
 import android.widget.BaseAdapter;
 
 import com.example.animtest.animations.R;
+
+import de.ur.mi.ux.weltenburg.fragments.BischofshofApplikation;
 
 
 public class Carousel extends CarouselSpinner implements GestureDetector.OnGestureListener {
@@ -99,7 +102,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 	    
         setNextSelectedPositionInt(selectedItem);
         
-        images.recycle();        
+        images.recycle();
         if(names != null)
         	names.recycle();		
 	}
@@ -149,7 +152,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
     //Ordnet die Bilder im Kreis an
 	@Override
 	protected boolean getChildStaticTransformation(View child, Transformation transformation) {
-		transformation.clear();
+        transformation.clear();
 		transformation.setTransformationType(Transformation.TYPE_MATRIX);
 		float centerX = (float)getWidth()/2, centerY = (float)getHeight()/2;
 		mWindowWidth = getWidth();
@@ -302,8 +305,9 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 	    
     private void makeAndAddView(int position, float angleOffset) {
         CarouselItem child;
-  
-        if (!mDataChanged) {
+
+        Log.e(this.getClass().getName(), "makeAndView "+position);
+
             child = (CarouselItem)mRecycler.get(position);
             if (child != null) {
                 setUpChild(child, child.getIndex(), angleOffset);
@@ -312,9 +316,6 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
                 setUpChild(child, child.getIndex(), angleOffset);            	
             }
             return;
-        }
-        child = (CarouselItem)mAdapter.getView(position, null, this);
-        setUpChild(child, child.getIndex(), angleOffset);
 
     }   
     
@@ -525,8 +526,8 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 				item.setImageBitmap(originalImage);
 				item.setText(app.getWeltenburgProdukte().get(i).getProduktDeText());				
 				item.setHeader(app.getWeltenburgProdukte().get(i).getHeader());
-				mImages[i] = item;						
-			}		
+				mImages[i] = item;
+            }
 		}
 
 		public int getCount() {

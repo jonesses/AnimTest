@@ -1,4 +1,4 @@
-package com.example.animtest.animations;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.animation.Animator;
 import android.app.Activity;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.animtest.animations.R;
 import com.makeramen.RoundedImageView;
 
 import de.ur.mi.bischofshof.helpers.AnimationHelper;

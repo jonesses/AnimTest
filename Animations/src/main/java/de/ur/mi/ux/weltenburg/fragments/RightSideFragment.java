@@ -1,4 +1,4 @@
-package com.example.animtest.animations;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+
+import com.example.animtest.animations.R;
 
 import de.ur.mi.projektion.bischofshof.CategoryConstants;
 import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;

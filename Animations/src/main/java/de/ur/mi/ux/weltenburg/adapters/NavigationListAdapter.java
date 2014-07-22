@@ -1,4 +1,4 @@
-package com.example.animtest.adapters;
+package de.ur.mi.ux.weltenburg.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

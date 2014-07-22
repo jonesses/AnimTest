@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.ContextMenu;
 import android.view.SoundEffectConstants;
@@ -754,6 +755,9 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
             mOldItemCount = mItemCount;
             mItemCount = getAdapter().getCount();
 
+            Log.e(this.getClass().getName(), "onChanged");
+
+
             // Detect the case where a cursor that was previously invalidated has
             // been repopulated with new data.
             if (CarouselAdapter.this.getAdapter().hasStableIds() && mInstanceState != null
@@ -770,6 +774,8 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
         @Override
         public void onInvalidated() {
             mDataChanged = true;
+
+            Log.e(this.getClass().getName(), "onInvalidated");
 
             if (CarouselAdapter.this.getAdapter().hasStableIds()) {
                 // Remember the current state for the case where our hosting activity is being
@@ -832,6 +838,10 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
     }
 
     private void fireOnSelected() {
+
+        Log.e(this.getClass().getName(), "fireOnSelected");
+
+
         if (mOnItemSelectedListener == null)
             return;
 
@@ -882,6 +892,9 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
     void handleDataChanged() {
         final int count = mItemCount;
         boolean found = false;
+
+        Log.e(this.getClass().getName(), "handleDataChanged");
+
 
         if (count > 0) {
 

@@ -1,4 +1,4 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Fragment;
 import android.graphics.Typeface;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.animtest.animations.R;
+import com.example.animtest.raphael.ListViewAdapterArticles;
 
 import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 

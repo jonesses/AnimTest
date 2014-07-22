@@ -1,4 +1,4 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.animtest.animations.R;
+import com.example.animtest.raphael.ListViewAdapterArticles;
 
 
 /**

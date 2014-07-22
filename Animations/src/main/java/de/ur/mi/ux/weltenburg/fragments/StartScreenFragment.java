@@ -1,4 +1,4 @@
-package com.example.animtest.animations;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.animtest.animations.R;
 import com.makeramen.RoundedImageView;
 
 import de.ur.mi.projektion.bischofshof.AnimationConstants;
@@ -21,7 +22,7 @@ import static android.view.View.OnClickListener;
 /**
  * Created by Jonas on 14.06.2014.
  */
-public class StartScreen extends Fragment implements Animator.AnimatorListener {
+public class StartScreenFragment extends Fragment implements Animator.AnimatorListener {
 
     private OnFragmentInteractionListener listener;
     private RoundedImageView deckel;

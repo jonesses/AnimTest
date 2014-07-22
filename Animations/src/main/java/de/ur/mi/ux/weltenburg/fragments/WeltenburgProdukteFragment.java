@@ -1,4 +1,4 @@
-package com.example.animtest.raphael;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.animtest.animations.R;
+import com.example.animtest.raphael.Carousel;
+import com.example.animtest.raphael.CarouselAdapter;
+
+import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 
 
 public class WeltenburgProdukteFragment extends Fragment implements OnClickListener{
@@ -22,7 +26,8 @@ public class WeltenburgProdukteFragment extends Fragment implements OnClickListe
 	private Carousel carousel;
 	private LinearLayout backLayout;
 	private View v;
-	
+    private OnFragmentInteractionListener fragmentInteractionListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.layout_weltenburg_produkte, container, false);
@@ -92,10 +97,15 @@ public class WeltenburgProdukteFragment extends Fragment implements OnClickListe
 	public void onClick(View v) {
 		switch (v.getId()) {	     
 	     case R.id.backLayoutProdukte:
-	    	 
-	    	 break;
+             fragmentInteractionListener.onTransitionFromFullscreenRequested();
+
+             break;
 	     default:
 	    	 break;
 	     }		
-	}    
+	}
+
+    public void setFragmentInteractionListener(OnFragmentInteractionListener fragmentInteractionListener) {
+        this.fragmentInteractionListener = fragmentInteractionListener;
+    }
 }

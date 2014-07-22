@@ -1,4 +1,4 @@
-package com.example.animtest.animations;
+package de.ur.mi.ux.weltenburg.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,7 +10,8 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.animtest.adapters.NavigationListAdapter;
+import de.ur.mi.ux.weltenburg.adapters.NavigationListAdapter;
+import com.example.animtest.animations.R;
 
 import java.util.ArrayList;
 
