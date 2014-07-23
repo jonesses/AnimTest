@@ -7,11 +7,11 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.example.animtest.animations.R;
-import com.makeramen.RoundedImageView;
 
 import de.ur.mi.projektion.bischofshof.AnimationConstants;
 import de.ur.mi.projektion.bischofshof.listeners.OnAnimationListener;
@@ -40,7 +40,7 @@ public class AnimationHelper {
 
         ObjectAnimator shadowFadeIn = ObjectAnimator.ofFloat(shadow, "alpha", 0f, 0.5f);
         ObjectAnimator shadowFadeOut = ObjectAnimator.ofFloat(shadow, "alpha", 0f);
-        shadowFadeIn.setDuration(AnimationConstants.ANIMATION_DURATION *2);
+        shadowFadeIn.setDuration(AnimationConstants.ANIMATION_DURATION * 2);
         shadowFadeOut.setDuration(AnimationConstants.ANIMATION_DURATION * 10);
 
         ObjectAnimator shadowScaleOutX = ObjectAnimator.ofFloat(shadow, "scaleX", 3.5f, 3f);
@@ -81,21 +81,21 @@ public class AnimationHelper {
         backgroundFadeOut.start();
     }
 
-    public static void startTransitionToFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener) {
+    public static void startTransitionToFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener, final int category) {
         //ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 0f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 5.7f);
         ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 5.7f);
-      //  ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 0.2f);
-      //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
+        //  ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 0.2f);
+        //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
         backgroundScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
         backgroundScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
-       // backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
+        // backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 4);
 
 //        backgroundFade.setStartDelay(AnimationConstants.ANIMATION_DURATION * 4);
 //        backgroundScaleX.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
 //        backgroundScaleY.setStartDelay(AnimationConstants.ANIMATION_DURATION * 3);
 
-       // backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
+        // backgroundMove.setInterpolator(new AccelerateDecelerateInterpolator());
 
         AnimatorSet set = new AnimatorSet();
         set.addListener(new Animator.AnimatorListener() {
@@ -106,7 +106,7 @@ public class AnimationHelper {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                animatorListener.onToFullscreenFinished();
+                animatorListener.onToFullscreenFinished(category);
             }
 
             @Override
@@ -127,11 +127,11 @@ public class AnimationHelper {
 
     public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener) {
 
-       // ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
+        // ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 3f);
         ObjectAnimator backgroundScaleY = ObjectAnimator.ofFloat(backgroundCircle, "scaleY", 3f);
-       // ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 1f);
-      //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+        // ObjectAnimator backgroundFade = ObjectAnimator.ofFloat(backgroundCircle, "alpha", 1f);
+        //  backgroundFade.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         backgroundScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         backgroundScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         //backgroundMove.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
@@ -164,5 +164,20 @@ public class AnimationHelper {
         set.start();
 
 
+    }
+
+    public static void dimDialogBackground(View dimmerbackground) {
+        ObjectAnimator backgroundDim = ObjectAnimator.ofFloat(dimmerbackground, "alpha", 0.7f);
+        backgroundDim.setDuration(800);
+        backgroundDim.setInterpolator(new DecelerateInterpolator());
+        backgroundDim.start();
+
+    }
+
+    public static void removeDialogBackground(View dimmerbackground) {
+        ObjectAnimator backgroundDim = ObjectAnimator.ofFloat(dimmerbackground, "alpha", 0f);
+        backgroundDim.setDuration(400);
+        backgroundDim.setInterpolator(new DecelerateInterpolator());
+        backgroundDim.start();
     }
 }

@@ -9,10 +9,11 @@
     android:weightSum="1">
 
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/leftside"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_weight=".55">
 
         <ListView
@@ -20,11 +21,25 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="7dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp" >
 
         </ListView>
 
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/bt_articleLayout_produkte_allgemeines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/products_button_text" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

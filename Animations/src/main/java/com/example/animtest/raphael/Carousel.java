@@ -20,29 +20,20 @@ import android.view.ViewGroup;
 import android.view.animation.Transformation;
 import android.widget.BaseAdapter;
 
-import com.example.animtest.animations.R;
-
 import de.ur.mi.ux.weltenburg.fragments.BischofshofApplikation;
 
 
 public class Carousel extends CarouselSpinner implements GestureDetector.OnGestureListener {
-
-	private static final int MIN_QUANTITY = 3;
-	private static final int MAX_QUANTITY = 12;
-	private static final float MAX_THETA = 15.0f;
-    private int mAnimationDuration = 900;    
+    private int mAnimationDuration = 200;    
 	private Camera mCamera = new Camera();    	
     private int mDownTouchPosition;
     private View mDownTouchView;
     private FlingRotateRunnable mFlingRunnable = new FlingRotateRunnable();
     private GestureDetector mGestureDetector;
     private int mGravity;
-    private int mMaxQuantity = MAX_QUANTITY;
-    private int mMinQuantity = MIN_QUANTITY;
     private boolean mShouldCallbackOnUnselectedItemClick = true;
     private boolean mShouldStopFling;
     private float mTheta = (float)(15.0f*(Math.PI/180.0));	
-    private boolean mUseReflection;
     private boolean moving = false;
     private boolean scrollingLeft = false;    
     private int selectedPosition = 0;
@@ -50,6 +41,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
     private float mWindowWidth;
     private boolean scrolling = false;
     private boolean flinging = false;
+    private ImageAdapter adapter;
 
 	public Carousel(Context context)  {
 		this(context, null);
@@ -61,53 +53,24 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 	
 	public Carousel(Context context, AttributeSet attrs, int defStyle) {		
 		super(context, attrs, defStyle);
+		
 		setChildrenDrawingOrderEnabled(true);
+		
 		mGestureDetector = new GestureDetector(this.getContext(), this);
 		mGestureDetector.setIsLongpressEnabled(true);
-		setStaticTransformationsEnabled(true);
-		
-		TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.Carousel);
-		mAnimationDuration = arr.getInteger(R.styleable.Carousel_android_animationDuration, 400);
-		mUseReflection = arr.getBoolean(R.styleable.Carousel_UseReflection, false);	
-		int selectedItem = arr.getInteger(R.styleable.Carousel_SelectedItem, 0);
-		int imageArrayID = arr.getResourceId(R.styleable.Carousel_Items, -1);		
-		TypedArray images = getResources().obtainTypedArray(imageArrayID);
-		
-		int namesForItems = arr.getResourceId(R.styleable.Carousel_Names, -1);
-		
-		TypedArray names = null;
-		if(namesForItems != -1)
-			names = getResources().obtainTypedArray(namesForItems);
-		
-		int min = arr.getInteger(R.styleable.Carousel_minQuantity, MIN_QUANTITY);
-		int max = arr.getInteger(R.styleable.Carousel_maxQuantity, MAX_QUANTITY);
-		
-		float mTheta = arr.getFloat(R.styleable.Carousel_maxTheta, MAX_THETA);
-		if(mTheta > MAX_THETA || mTheta < 0.0f)
-			mTheta = MAX_THETA;
-		
-		mMinQuantity = min < MIN_QUANTITY ? MIN_QUANTITY : min;
-		mMaxQuantity = max > MAX_QUANTITY ? MAX_QUANTITY : max;
-		
-		if(arr.length() < mMinQuantity || arr.length() > mMaxQuantity)
-			throw new IllegalArgumentException("Invalid set of items.");
-		
-		ImageAdapter adapter = new ImageAdapter(getContext());
-		adapter.SetImages(images, names, mUseReflection);
+		setStaticTransformationsEnabled(true);	
+		adapter = new ImageAdapter(getContext());
+		adapter.SetImages();
 		
 	    setAdapter(adapter);
-
-	    if(selectedItem < 0 || selectedItem >= adapter.getCount())
-	    	selectedItem = 0;
-	    
-        setNextSelectedPositionInt(selectedItem);
-        
-        images.recycle();
-        if(names != null)
-        	names.recycle();		
+	    setNextSelectedPositionInt(0);
 	}
 	
-    @Override
+	public void refreshShit(){
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
     public boolean onTouchEvent(MotionEvent event) {
         boolean retValue = mGestureDetector.onTouchEvent(event); 
         int action = MotionEventCompat.getActionMasked(event);        
@@ -152,7 +115,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
     //Ordnet die Bilder im Kreis an
 	@Override
 	protected boolean getChildStaticTransformation(View child, Transformation transformation) {
-        transformation.clear();
+		transformation.clear();
 		transformation.setTransformationType(Transformation.TYPE_MATRIX);
 		float centerX = (float)getWidth()/2, centerY = (float)getHeight()/2;
 		mWindowWidth = getWidth();
@@ -216,9 +179,11 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        mInLayout = true;
-        layout(0, false);
-        mInLayout = false;
+        if(getAdapter()!=null){
+	        mInLayout = true;
+	        layout(0, false);
+	        mInLayout = false;
+        }
     }	   
 	
     @Override
@@ -303,11 +268,9 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
         return childTop;
     }     	      
 	    
-    private void makeAndAddView(int position, float angleOffset) {
-        CarouselItem child;
-
-        Log.e(this.getClass().getName(), "makeAndView "+position);
-
+    private void makeAndAddView(int position, float angleOffset) {    	
+    	CarouselItem child;  
+        if (!mDataChanged) {
             child = (CarouselItem)mRecycler.get(position);
             if (child != null) {
                 setUpChild(child, child.getIndex(), angleOffset);
@@ -316,6 +279,9 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
                 setUpChild(child, child.getIndex(), angleOffset);            	
             }
             return;
+        }
+        child = (CarouselItem)mAdapter.getView(position, null, this);
+        setUpChild(child, child.getIndex(), angleOffset);
 
     }   
     
@@ -516,7 +482,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 			app = (BischofshofApplikation) mContext.getApplicationContext();
 		}	
 		
-		public void SetImages(TypedArray array, TypedArray names, boolean reflected){						
+		public void SetImages(){						
 			mImages = new CarouselItem[app.getWeltenburgProdukte().size()];			
 			
 			for(int i = 0; i< app.getWeltenburgProdukte().size(); i++){ 
@@ -526,8 +492,8 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 				item.setImageBitmap(originalImage);
 				item.setText(app.getWeltenburgProdukte().get(i).getProduktDeText());				
 				item.setHeader(app.getWeltenburgProdukte().get(i).getHeader());
-				mImages[i] = item;
-            }
+				mImages[i] = item;						
+			}		
 		}
 
 		public int getCount() {

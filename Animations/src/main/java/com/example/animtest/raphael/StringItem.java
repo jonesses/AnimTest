@@ -2,15 +2,15 @@ package com.example.animtest.raphael;
 
 public class StringItem {
 
-	private int id;
+	private String id;
 	private String stringItem;
 	
-	public StringItem(int id, String stringItem){
+	public StringItem(String id, String stringItem){
 		this.id = id;
 		this.stringItem = stringItem;
 	}
 	
-	public int getId(){
+	public String getId(){
 		return id;
 	}
 	

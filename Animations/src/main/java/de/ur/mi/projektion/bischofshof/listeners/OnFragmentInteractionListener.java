@@ -7,8 +7,8 @@ import android.view.View;
  */
 public interface OnFragmentInteractionListener {
     public void onClick(View clickedView, String side);
-    public void onTransitionToFullscreenRequested();
-    public void onTransitionFromFullscreenRequested();
+    public void onTransitionToFullscreenRequested(int category);
+    public void onTransitionFromFullscreenRequested(int category);
     public void onAnimationStarted();
     public void onAnimationFinished();
 }

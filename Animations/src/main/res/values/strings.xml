@@ -8,5 +8,6 @@
     <string name="hello">Herzlich Willkommen!</string>
     <string name="note">Alle Leute Bitches überall…</string>
     <string name="timeline_button_text">Zur weiteren Geschichte</string>
+    <string name="products_button_text">Zu den Produkten</string>
 
 </resources>

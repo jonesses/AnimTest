@@ -220,7 +220,7 @@ public class KKViewPager extends ViewPager {
 		setOffscreenPageLimit(arg0.getCount() - 1);
 		if (!isFirstTime) {
 			update();
-			hack();
+			//hack();
 		}
 	}
 
@@ -231,12 +231,12 @@ public class KKViewPager extends ViewPager {
 		if (isFirstTime) {
 			isFirstTime = false;
 			update();
-//			hack();
+			//hack();
 		}
 	}
 
 	public void update() {
-		int size = 17;
+		int size = getAdapter().getCount();
 		if (size >= 3)
 			for (int i = 1; i < 3; i++) {
 				View l = findViewFromObject(i);
@@ -275,7 +275,6 @@ public class KKViewPager extends ViewPager {
 		event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 50, mCenterY, 0);
 		this.dispatchTouchEvent(event);
 		event.recycle();*/	
-		Log.e(this.getClass().getName(), "Scrolled");
 		MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_DOWN, 1200, 100, 0);
 		MotionEvent motionEvent2 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_MOVE, 200, 100, 0);
 		MotionEvent motionEvent3 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_UP, 1200, 100, 0);

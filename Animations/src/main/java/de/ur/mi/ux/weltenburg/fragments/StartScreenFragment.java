@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.animtest.animations.R;
@@ -25,7 +26,9 @@ import static android.view.View.OnClickListener;
 public class StartScreenFragment extends Fragment implements Animator.AnimatorListener {
 
     private OnFragmentInteractionListener listener;
-    private RoundedImageView deckel;
+    private ImageView deckel;
+    private ImageView logo;
+
     private View background;
     private Activity parentActivity;
     private TextView welcome;
@@ -48,9 +51,9 @@ public class StartScreenFragment extends Fragment implements Animator.AnimatorLi
     }
 
     private void initUI(View v) {
-        deckel = (RoundedImageView) v.findViewById(R.id.start_deckel);
+        deckel = (ImageView) v.findViewById(R.id.start_deckel);
+        logo = (ImageView) v.findViewById(R.id.start_logo);
         background = v.findViewById(R.id.start_background);
-       // welcome = (TextView) v.findViewById(R.id.welcome_textview);
     }
 
     private void setListeners() {
@@ -74,6 +77,15 @@ public class StartScreenFragment extends Fragment implements Animator.AnimatorLi
         deckelScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
         deckelScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
 
+        logo.setPivotX(0);
+        logo.setPivotY(deckel.getWidth() / 2);
+        ObjectAnimator logoFadeOut = ObjectAnimator.ofFloat(logo, "alpha", 0f);
+        logoFadeOut.setDuration(AnimationConstants.ANIMATION_DURATION * 6);
+        ObjectAnimator logoScaleX = ObjectAnimator.ofFloat(logo, "scaleX", 3f);
+        ObjectAnimator logoScaleY = ObjectAnimator.ofFloat(logo, "scaleY", 3f);
+        logoScaleX.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+        logoScaleY.setDuration(AnimationConstants.ANIMATION_DURATION * 5);
+
 //        ObjectAnimator welcomeTextFade = ObjectAnimator.ofFloat(welcome, "alpha", 0f);
 //        welcomeTextFade.setDuration(AnimationConstants.ANIMATION_DURATION * 2);
 
@@ -81,12 +93,14 @@ public class StartScreenFragment extends Fragment implements Animator.AnimatorLi
         backgroundAnim.setDuration(AnimationConstants.ANIMATION_DURATION * 6);
         ObjectAnimator deckelFade = ObjectAnimator.ofFloat(deckel, "alpha", 0f);
         deckelFade.setDuration(AnimationConstants.ANIMATION_DURATION * 8);
-        deckelFade.setStartDelay(AnimationConstants.ANIMATION_DURATION * 6);
+        deckelFade.setStartDelay(AnimationConstants.ANIMATION_DURATION * 8);
 
         AnimatorSet animatorSet = new AnimatorSet();
 
         animatorSet.play(deckelScaleX).with(deckelScaleY);
         animatorSet.play(backgroundAnim).after(deckelScaleX);
+        animatorSet.play(logoFadeOut);
+        animatorSet.playTogether(logoFadeOut, logoScaleX, logoScaleY);
         animatorSet.play(deckelFade);
        // animatorSet.play(welcomeTextFade);
         animatorSet.addListener(this);

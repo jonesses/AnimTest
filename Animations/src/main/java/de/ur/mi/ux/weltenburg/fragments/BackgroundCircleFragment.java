@@ -59,8 +59,8 @@ public class BackgroundCircleFragment extends Fragment {
         AnimationHelper.animateShadowOptionSelected(shadow, color);
 
     }
-    public void expandToFullscreen(OnAnimationListener listener){
-        AnimationHelper.startTransitionToFullscreenAnimation(backgroundCircle, listener);
+    public void expandToFullscreen(OnAnimationListener listener, int category){
+        AnimationHelper.startTransitionToFullscreenAnimation(backgroundCircle, listener, category);
 
     }
 

@@ -170,7 +170,7 @@ public class BischofshofClasses{
 		ArrayList<String> myFiles = getTextFilesInDir(string, mContext);
 		
 		for(int i = 0; i < myFiles.size(); i++){
-			items.add(new StringItem(Integer.parseInt(myFiles.get(i).substring(0, myFiles.get(i).length() - 4)), readTxtDatei(string+myFiles.get(i), mContext)));			
+			items.add(new StringItem(myFiles.get(i).substring(0, myFiles.get(i).length() - 4), readTxtDatei(string+myFiles.get(i), mContext)));
 		}		
 		
 		return items;		

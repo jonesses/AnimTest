@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,10 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
 
         requestLayout();
 		
+	}
+	
+	public void checkAdapter(){
+		mDataSetObserver.onInvalidated();
 	}
 
     public View getSelectedView() {
@@ -351,12 +356,15 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
          */
         private SavedState(Parcel in) {
             super(in);
+                        
             selectedId = in.readLong();
             position = in.readInt();
         }
 
         @Override
         public void writeToParcel(Parcel out, int flags) {
+        	
+
             super.writeToParcel(out, flags);
             out.writeLong(selectedId);
             out.writeInt(position);
@@ -364,19 +372,18 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
 
         @Override
         public String toString() {
-            return "AbsSpinner.SavedState{"
-                    + Integer.toHexString(System.identityHashCode(this))
-                    + " selectedId=" + selectedId
-                    + " position=" + position + "}";
+            return "AbsSpinner.SavedState{"+ Integer.toHexString(System.identityHashCode(this)) + " selectedId=" + selectedId + " position=" + position + "}";
         }
 
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
+        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
+
                 return new SavedState(in);
+                
             }
 
             public SavedState[] newArray(int size) {
+           	
                 return new SavedState[size];
             }
         };
@@ -385,6 +392,7 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
+        
         SavedState ss = new SavedState(superState);
         ss.selectedId = getSelectedItemId();
         if (ss.selectedId >= 0) {
@@ -398,7 +406,6 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
-  
         super.onRestoreInstanceState(ss.getSuperState());
 
         if (ss.selectedId >= 0) {
@@ -431,6 +438,7 @@ public abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
         }
 
         void clear() {
+        	        	
             final SparseArray<View> scrapHeap = mScrapHeap;
             final int count = scrapHeap.size();
             for (int i = 0; i < count; i++) {

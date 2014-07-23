@@ -102,10 +102,14 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
 
     private void initUI() {
+
+
         initiateFragments();
         setListeners();
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
         fragmentTransaction
                 .add(R.id.frame, background)
                 .add(R.id.frame, leftSide)
@@ -114,11 +118,17 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                 .add(R.id.frame, geschichteAllgemeinesFragment).hide(geschichteAllgemeinesFragment)
                 .add(R.id.frame, produkteAllgemeinesFragment).hide(produkteAllgemeinesFragment)
                 .add(R.id.frame, aktuellesFragment)
-                .add(R.id.frame, produkteFragment).hide(produkteFragment)
                 .add(R.id.frame, startScreen)
+
                 .commit();
 
-        supportFragmentManager.beginTransaction().add(R.id.frame, geschichteFragment).hide(geschichteFragment).commit();
+
+        supportFragmentManager.beginTransaction()
+                .add(R.id.frame, geschichteFragment)
+                .hide(geschichteFragment)
+                .add(R.id.frame, produkteFragment)
+                .hide(produkteFragment)
+                .commit();
 
 
     }
@@ -129,6 +139,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         leftSide.setCategorySelectedListener(this);
         startScreen.setFragmentInteractionListener(this);
         geschichteAllgemeinesFragment.setOnFragmentInteractionListener(this);
+        produkteAllgemeinesFragment.setOnFragmentInteractionListener(this);
         geschichteFragment.setFragmentInteractionListener(this);
         produkteFragment.setFragmentInteractionListener(this);
     }
@@ -141,15 +152,15 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         backgroundCircle = new BackgroundCircleFragment();
 
         aktuellesFragment = new AktuellesFragment();
-        produkteFragment = new WeltenburgProdukteFragment();
-        ausflugAutoFragment = new AusflugAutoFragment();
-        ausflugFussFragment = new AusflugFussFragment();
-        ausflugRadFragment = new AusflugRadFragment();
-        ausflugSchiffFragment = new AusflugSchiffFragment();
+//        ausflugAutoFragment = new AusflugAutoFragment();
+//        ausflugFussFragment = new AusflugFussFragment();
+//        ausflugRadFragment = new AusflugRadFragment();
+//        ausflugSchiffFragment = new AusflugSchiffFragment();
         geschichteAllgemeinesFragment = new GeschichteAllgemeinesFragment();
         produkteAllgemeinesFragment = new ProdukteAllgemeinesFragment();
         ausflugFragment = new AusflugFragment();
         geschichteFragment = new WeltenburgGeschichteFragment();
+        produkteFragment = new WeltenburgProdukteFragment();
     }
 
 
@@ -159,27 +170,55 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     }
 
     @Override
-    public void onTransitionToFullscreenRequested() {
-        backgroundCircle.expandToFullscreen(this);
-        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        fullscreenTransaction.hide(leftSide)
-                .hide(rightSide)
-                .hide(geschichteAllgemeinesFragment)
-                .commit();
+    public void onTransitionToFullscreenRequested(int category) {
+
+        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in_to_left, R.anim.fade_out_to_left);
+
+        switch (category) {
+            case CategoryConstants.CATEGORY_GESCHICHTE:
+                fullscreenTransaction.hide(leftSide)
+                        .hide(rightSide)
+                        .hide(geschichteAllgemeinesFragment);
+                break;
+            case CategoryConstants.CATEGORY_PRODUKTE:
+                fullscreenTransaction.hide(leftSide)
+                        .hide(rightSide)
+                        .hide(produkteAllgemeinesFragment);
+        }
+
+        fullscreenTransaction.commit();
+        backgroundCircle.expandToFullscreen(this, category);
     }
 
     @Override
-    public void onTransitionFromFullscreenRequested() {
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in_support, R.anim.fade_out_support)
-                .hide(geschichteFragment)
-                .commit();
+    public void onTransitionFromFullscreenRequested(int category) {
+        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentTransaction fullscreenSupportTransaction = supportFragmentManager.beginTransaction();
 
-        FragmentTransaction fullscreenTransaction = fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        fullscreenTransaction.show(leftSide)
-                .show(rightSide)
-                .show(geschichteAllgemeinesFragment)
-                .commit();
+        switch (category) {
+            case CategoryConstants.CATEGORY_GESCHICHTE:
+                fullscreenSupportTransaction.setCustomAnimations(R.anim.fade_in_to_left_support, R.anim.fade_out_to_right_support)
+                        .hide(geschichteFragment);
+
+                fullscreenTransaction
+                        .setCustomAnimations(R.anim.fade_in_to_right, R.anim.fade_out_to_right)
+                        .show(leftSide)
+                        .show(rightSide)
+                        .show(geschichteAllgemeinesFragment);
+                break;
+            case CategoryConstants.CATEGORY_PRODUKTE:
+                fullscreenTransaction.setCustomAnimations(R.anim.fade_in_to_right, R.anim.fade_out_to_right)
+                        .show(leftSide)
+                        .show(rightSide)
+                        .show(produkteAllgemeinesFragment);
+                fullscreenSupportTransaction.setCustomAnimations(R.anim.fade_in_to_left_support, R.anim.fade_out_to_right_support)
+                        .hide(produkteFragment);
+
+
+                break;
+        }
+        fullscreenTransaction.commit();
+        fullscreenSupportTransaction.commit();
 
         backgroundCircle.shrinkFromFullscreen(this);
     }
@@ -205,33 +244,50 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     @Override
     public void onCategoryChangeRequested(int category) {
         FragmentTransaction transaction = fragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .hide(ausflugFussFragment)
-                .hide(ausflugSchiffFragment)
-                .hide(ausflugRadFragment)
-                .hide(ausflugFragment)
-                .hide(geschichteAllgemeinesFragment)
-                .hide(produkteAllgemeinesFragment)
-                .hide(aktuellesFragment);
+                .setCustomAnimations(R.anim.fade_in_to_right, R.anim.fade_out);
 
         switch (category) {
             case CategoryConstants.CATEGORY_AKTUELLES:
                 transaction
+//                        .hide(ausflugFussFragment)
+//                        .hide(ausflugSchiffFragment)
+//                        .hide(ausflugRadFragment)
+                        .hide(ausflugFragment)
+                        .hide(geschichteAllgemeinesFragment)
+                        .hide(produkteAllgemeinesFragment)
                         .show(aktuellesFragment)
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_GESCHICHTE:
                 transaction
+//                        .hide(ausflugFussFragment)
+//                        .hide(ausflugSchiffFragment)
+//                        .hide(ausflugRadFragment)
+                        .hide(ausflugFragment)
+                        .hide(produkteAllgemeinesFragment)
+                        .hide(aktuellesFragment)
                         .show(geschichteAllgemeinesFragment)
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_PRODUKTE:
                 transaction
+//                        .hide(ausflugFussFragment)
+//                        .hide(ausflugSchiffFragment)
+//                        .hide(ausflugRadFragment)
+                        .hide(ausflugFragment)
+                        .hide(geschichteAllgemeinesFragment)
+                        .hide(aktuellesFragment)
                         .show(produkteAllgemeinesFragment)
                         .commit();
                 break;
             case CategoryConstants.CATEGORY_AUSFLUG:
                 transaction
+//                        .hide(ausflugFussFragment)
+//                        .hide(ausflugSchiffFragment)
+//                        .hide(ausflugRadFragment)
+                        .hide(geschichteAllgemeinesFragment)
+                        .hide(produkteAllgemeinesFragment)
+                        .hide(aktuellesFragment)
                         .show(ausflugFragment)
                         .commit();
                 break;
@@ -240,6 +296,8 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
 
 
     private void hideStartscreenFragment() {
+        //  fragmentManager.beginTransaction().hide(produkteFragment).commit();
+
         fragmentManager
                 .beginTransaction()
                 .hide(startScreen)
@@ -293,7 +351,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         for (int i = 0; i < deTextItems.size(); i++) {
             currentBitmap = null;
             for (int m = 0; m < bitmapItems.size(); m++) {
-                if (bitmapItems.get(m).getId().equals(deTextItems.get(i).getId() + "")) {
+                if (bitmapItems.get(m).getId().equals(deTextItems.get(i).getId())) {
                     currentBitmap = bitmapItems.get(m).getBitmap();
                 }
             }
@@ -320,7 +378,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
                         currentBitmap = bitmapItems.get(m).getBitmap();
                     }
                 }
-                geschichte.add(new Geschichte(currentBitmap, deTextItems.get(i).getStringItem(), deTextItems.get(i).getId()));
+                geschichte.add(new Geschichte(currentBitmap, deTextItems.get(i).getStringItem(), Integer.parseInt(deTextItems.get(i).getId())));
             }
         } else {
             Log.e(this.getClass().getName(), string);
@@ -332,16 +390,20 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     private ArrayList<Produkte> getProdukte(String string) {
         ArrayList<Produkte> produkte = new ArrayList<Produkte>();
         ArrayList<BitmapItem> bitmapItems;
-        ArrayList<String> deTexts = new ArrayList<String>();
+        ArrayList<StringItem> deTexts = new ArrayList<StringItem>();
 
         bitmapItems = classes.getProdukte(string, this);
-        deTexts = classes.getTextFiles(string + this.getString(R.string.de), this);
+        deTexts = classes.getTextItems(string + this.getString(R.string.de), this);
 
 
         if (deTexts != null) {
             if (bitmapItems.size() == deTexts.size()) {
                 for (int i = 0; i < bitmapItems.size(); i++) {
-                    produkte.add(new Produkte(bitmapItems.get(i).getBitmap(), deTexts.get(i), bitmapItems.get(i).getId()));
+                    for (int m = 0; m < deTexts.size(); m++) {
+                        if (bitmapItems.get(i).getId().equals(deTexts.get(m).getId())) {
+                            produkte.add(new Produkte(bitmapItems.get(i).getBitmap(), deTexts.get(m).getStringItem(), bitmapItems.get(i).getId()));
+                        }
+                    }
                 }
             } else {
                 Log.e(this.getClass().getName(), string);
@@ -415,11 +477,24 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     }
 
     @Override
-    public void onToFullscreenFinished() {
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .show(produkteFragment)
-                .commit();
+    public void onToFullscreenFinished(int category) {
+        android.support.v4.app.FragmentTransaction supportTransaction = supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in_to_left_support, R.anim.fade_out_to_right_support);
+
+        switch (category) {
+            case CategoryConstants.CATEGORY_GESCHICHTE:
+                supportTransaction
+                        .show(geschichteFragment)
+                        .commit();
+                geschichteFragment.getFirstButtonPos();
+                break;
+            case CategoryConstants.CATEGORY_PRODUKTE:
+                supportTransaction
+                        .show(produkteFragment)
+                        .commit();
+                produkteFragment.initShit();
+                break;
+        }
+
     }
 
     @Override

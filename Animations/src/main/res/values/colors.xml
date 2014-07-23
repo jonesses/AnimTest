@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#000000</color>
     <color name="content_white">#FFFFFF</color>
-    <color name="translucent_black">#95000000</color>
+    <color name="translucent_black">#aa000000</color>
 
 
 </resources>

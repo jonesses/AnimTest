@@ -15,117 +15,64 @@
         android:layout_weight=".55">
 
 
-        <RelativeLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="50dp"
-            android:gravity="center">
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="@dimen/ausflug_relativelayout_width"
-                android:layout_height="@dimen/ausflug_relativelayout_height"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imageButton1"
-                    android:layout_width="@dimen/ausflug_image_size"
-                    android:layout_height="@dimen/ausflug_image_size"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="centerCrop" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageButton1"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="@dimen/ausflug_relativelayout_width"
-                android:layout_height="@dimen/ausflug_relativelayout_height"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
-                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:gravity="right"
+                android:weightSum="4">
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="@dimen/ausflug_image_size"
-                    android:layout_height="@dimen/ausflug_image_size"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
+                    android:id="@+id/bt_car"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/trip_button_height"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:scaleType="centerCrop" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageButton4"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout3"
-                android:layout_width="@dimen/ausflug_relativelayout_width"
-                android:layout_height="@dimen/ausflug_relativelayout_height"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/relativeLayout2"
-                android:orientation="vertical">
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/car_icon" />
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="@dimen/ausflug_image_size"
-                    android:layout_height="@dimen/ausflug_image_size"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
+                    android:id="@+id/bt_boat"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/trip_button_height"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:scaleType="centerCrop" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageButton2"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="@dimen/ausflug_relativelayout_width"
-                android:layout_height="@dimen/ausflug_relativelayout_height"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/relativeLayout3"
-                android:orientation="vertical">
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/boat_icon" />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="@dimen/ausflug_image_size"
-                    android:layout_height="@dimen/ausflug_image_size"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
+                    android:id="@+id/bt_bike"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/trip_button_height"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/bike_icon" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageButton3"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-        </RelativeLayout>
+                <ImageButton
+                    android:id="@+id/bt_hike"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/trip_button_height"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/hike_icon" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_background"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 </LinearLayout>

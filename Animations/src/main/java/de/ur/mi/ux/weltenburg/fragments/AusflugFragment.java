@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class AusflugFragment extends Fragment {
     private View v; 
     private ArrayList<Logos> weltenburg_aufNachWeltenburg_logos;
-    private TextView textView1, textView2, textView3, textView4;
 	private ImageView imageButton1, imageButton2, imageButton3, imageButton4, germanButton, englishButton;
 	private Logos logo;
 
@@ -34,7 +33,6 @@ public class AusflugFragment extends Fragment {
     private void initData(){
     	referenceClasses();
     	initUIElements();
-    	initImageAndTextViews();
     	onClickListener();
     }
     
@@ -43,30 +41,14 @@ public class AusflugFragment extends Fragment {
 	}
 
 	private void initUIElements() {
-		textView1 = (TextView) v.findViewById (R.id.textView1);
-		textView2 = (TextView) v.findViewById (R.id.textView2);
-		textView3 = (TextView) v.findViewById (R.id.textView3);
-		textView4 = (TextView) v.findViewById (R.id.textView4);
-		imageButton1 = (ImageView) v.findViewById (R.id.imageButton1);
-		imageButton2 = (ImageView) v.findViewById (R.id.imageButton2);
-		imageButton3 = (ImageView) v.findViewById (R.id.imageButton3);
-		imageButton4 = (ImageView) v.findViewById (R.id.imageButton4);
+
+		imageButton1 = (ImageView) v.findViewById (R.id.bt_car);
+		imageButton2 = (ImageView) v.findViewById (R.id.bt_boat);
+		imageButton3 = (ImageView) v.findViewById (R.id.bt_bike);
+		imageButton4 = (ImageView) v.findViewById (R.id.bt_hike);
 	}
 
-	private void initImageAndTextViews() {
-		logo = weltenburg_aufNachWeltenburg_logos.get(0);
-		textView1.setText(logo.getGermanText());	
-		imageButton1.setImageBitmap(logo.getBitmapLogo());
-		logo = weltenburg_aufNachWeltenburg_logos.get(1);
-		textView2.setText(logo.getGermanText());
-		imageButton2.setImageBitmap(logo.getBitmapLogo());
-		logo = weltenburg_aufNachWeltenburg_logos.get(2);
-		textView3.setText(logo.getGermanText());
-		imageButton3.setImageBitmap(logo.getBitmapLogo());
-		logo = weltenburg_aufNachWeltenburg_logos.get(3);
-		textView4.setText(logo.getGermanText());
-		imageButton4.setImageBitmap(logo.getBitmapLogo());	
-	}
+
 	
 	private void onClickListener(){
 

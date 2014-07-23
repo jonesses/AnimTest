@@ -14,6 +14,6 @@
         <!--android:propertyName="translationX"-->
         <!--android:valueFrom="0"-->
         <!--android:valueTo="100"-->
-        <!--android:valueType="floatType" />-->
+    <!--android:valueType="floatType" />-->
 
 </set>

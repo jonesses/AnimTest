@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.example.animtest.animations.R;
 import com.example.animtest.raphael.ListViewAdapterArticles;
 
+import de.ur.mi.projektion.bischofshof.CategoryConstants;
 import de.ur.mi.projektion.bischofshof.listeners.OnFragmentInteractionListener;
 
 
@@ -37,7 +38,7 @@ public class GeschichteAllgemeinesFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                fragmentInteractionListener.onTransitionToFullscreenRequested();
+                fragmentInteractionListener.onTransitionToFullscreenRequested(CategoryConstants.CATEGORY_GESCHICHTE);
             }
         });
     }

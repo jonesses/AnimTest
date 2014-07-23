@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:pj="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pj="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    
-   <LinearLayout
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5"
+        android:gravity="top"
+        android:padding="5dip">
+
+        <com.example.animtest.raphael.Carousel
+            android:id="@+id/carousel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:animationDuration="500"
+            pj:Items="@array/entries"
+            pj:Names="@array/names"
+            pj:SelectedItem="0"
+            pj:UseReflection="true"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/background_dialog_dimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/black"
+
+        />
+
+    <LinearLayout
         android:id="@+id/backLayoutProdukte"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginLeft="10dp"
         android:clickable="true"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <ImageButton
             android:id="@+id/button1"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/back" />
+            android:background="@drawable/back"
+            android:clickable="false" />
 
         <TextView
-            android:id="@+id/tvBackLayout"
+            android:id="@+id/tvBackLayoutProdukte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -31,22 +60,4 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
-    
-    <LinearLayout
-    	android:layout_weight="0.5"
-    	android:padding="5dip"
-    	android:gravity="top"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"	>
-	    
-			<com.example.animtest.raphael.Carousel
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"	
-			    android:id="@+id/carousel"  
-			    pj:UseReflection="true"
-			    pj:Items="@array/entries"
-			    pj:Names="@array/names" 
-			    pj:SelectedItem="0"
-			    android:animationDuration="200"/>    	
-	</LinearLayout>    	
-</LinearLayout>
+</FrameLayout>

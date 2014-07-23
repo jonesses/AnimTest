@@ -5,7 +5,7 @@ package de.ur.mi.projektion.bischofshof.listeners;
  */
 public interface OnAnimationListener {
     public void onToFullscreenStarted();
-    public void onToFullscreenFinished();
+    public void onToFullscreenFinished(int category);
     public void onFromFullscreenStarted();
     public void onFromFullscreenFinished();
 

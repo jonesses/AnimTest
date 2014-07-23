@@ -1,7 +1,5 @@
 package com.example.animtext.max;
 
-import com.example.animtest.animations.R;
-import com.example.animtest.raphael.Geschichte;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,6 +19,9 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.animtest.animations.R;
+import com.example.animtest.raphael.Geschichte;
 
 public final class TestFragment extends Fragment {
 

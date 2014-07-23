@@ -1,5 +1,6 @@
 package com.example.animtest.raphael;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Handler;
@@ -681,7 +682,8 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
      * we have an empty view, display it.  In all the other cases, make sure that the listview
      * is VISIBLE and that the empty view is GONE (if it's not null).
      */
-    private void updateEmptyStatus(boolean empty) {
+    @SuppressLint("WrongCall")
+	private void updateEmptyStatus(boolean empty) {
         if (isInFilterMode()) {
             empty = false;
         }
@@ -751,12 +753,10 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
 
         @Override
         public void onChanged() {
+                	
             mDataChanged = true;
             mOldItemCount = mItemCount;
             mItemCount = getAdapter().getCount();
-
-            Log.e(this.getClass().getName(), "onChanged");
-
 
             // Detect the case where a cursor that was previously invalidated has
             // been repopulated with new data.
@@ -773,17 +773,15 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
 
         @Override
         public void onInvalidated() {
+        	
+        	
             mDataChanged = true;
 
-            Log.e(this.getClass().getName(), "onInvalidated");
-
             if (CarouselAdapter.this.getAdapter().hasStableIds()) {
-                // Remember the current state for the case where our hosting activity is being
-                // stopped and later restarted
                 mInstanceState = CarouselAdapter.this.onSaveInstanceState();
             }
 
-            // Data is invalid so we should reset our state
+            
             mOldItemCount = mItemCount;
             mItemCount = 0;
             mSelectedPosition = INVALID_POSITION;
@@ -798,6 +796,7 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
         }
 
         public void clearSavedState() {
+
             mInstanceState = null;
         }
     }
@@ -816,6 +815,9 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
     }
 
     void selectionChanged() {
+    	
+
+    	
         if (mOnItemSelectedListener != null) {
             if (mInLayout || mBlockLayoutRequests) {
                 // If we are in a layout traversal, defer notification
@@ -838,10 +840,8 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
     }
 
     private void fireOnSelected() {
-
-        Log.e(this.getClass().getName(), "fireOnSelected");
-
-
+    	
+    	
         if (mOnItemSelectedListener == null)
             return;
 
@@ -890,11 +890,10 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
     }
 
     void handleDataChanged() {
+    	
+ 	
         final int count = mItemCount;
         boolean found = false;
-
-        Log.e(this.getClass().getName(), "handleDataChanged");
-
 
         if (count > 0) {
 
@@ -972,6 +971,8 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
      *         be found
      */
     int findSyncPosition() {
+    	
+   	
         int count = mItemCount;
 
         if (count == 0) {
@@ -1092,6 +1093,8 @@ public abstract class  CarouselAdapter <T extends Adapter> extends ViewGroup {
      *
      */
     void rememberSyncState() {
+    	
+    	
         if (getChildCount() > 0) {
             mNeedSync = true;
             mSyncHeight = mLayoutHeight;
