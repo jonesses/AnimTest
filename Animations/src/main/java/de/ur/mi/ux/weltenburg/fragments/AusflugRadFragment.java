@@ -15,7 +15,9 @@ import com.example.animtest.raphael.ListViewAdapterArticles;
  * Created by Jonas (Bitch!!!) on 08.07.2014.
  */
 public class AusflugRadFragment extends Fragment {
-    View v; 
+    View v;
+    ListView lv_articles;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {        
@@ -23,9 +25,20 @@ public class AusflugRadFragment extends Fragment {
         initData();
         return v;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        resetListPos();
+
+    }
+
+
+    private void resetListPos() {
+        lv_articles.setSelection(0);
+    }
     
     private void initData(){
-    	ListView lv_articles = (ListView) v.findViewById (R.id.articleLayout_ausflug_rad);
+    	lv_articles = (ListView) v.findViewById (R.id.articleLayout_ausflug_rad);
 		lv_articles.setDivider(null);
 		ListViewAdapterArticles adapter = new ListViewAdapterArticles(getActivity(), ((BischofshofApplikation)getActivity().getApplication()).getWeltenburgAufNachWeltenburgRad().getArticles(), ((BischofshofApplikation)getActivity().getApplication()).getWeltenburgAufNachWeltenburgRad().getHeader());
 		lv_articles.setAdapter(adapter);	

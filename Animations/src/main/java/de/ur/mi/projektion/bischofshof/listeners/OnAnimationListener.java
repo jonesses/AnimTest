@@ -7,6 +7,6 @@ public interface OnAnimationListener {
     public void onToFullscreenStarted();
     public void onToFullscreenFinished(int category);
     public void onFromFullscreenStarted();
-    public void onFromFullscreenFinished();
+    public void onFromFullscreenFinished(int category);
 
 }

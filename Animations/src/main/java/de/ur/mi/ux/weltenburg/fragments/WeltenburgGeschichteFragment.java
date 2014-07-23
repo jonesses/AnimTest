@@ -68,8 +68,8 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
     }
 
     public void getFirstButtonPos() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        final Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 button1.getLocationOnScreen(loc);
@@ -77,6 +77,27 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
             }
         }, 400);
 
+    }
+
+    public void resetFragment(){
+        final Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            private int pos = 0;
+            @Override
+            public void run() {
+                if (pos == 25) {
+                    mHandler.removeCallbacks(runnable);
+                    disablePageDetection = false;
+                    currentTimelinePos = 0;
+                    setTimelineButtonSelected(0);
+                    sv.scrollTo(0,0);
+                } else {
+                    mPager.scrollOneLeft();
+                    mHandler.postDelayed(this, 0);
+                    pos++;
+                }
+            }
+        }, 0);
     }
 
     private void referenceFonts() {

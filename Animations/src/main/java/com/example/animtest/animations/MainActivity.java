@@ -220,7 +220,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         fullscreenTransaction.commit();
         fullscreenSupportTransaction.commit();
 
-        backgroundCircle.shrinkFromFullscreen(this);
+        backgroundCircle.shrinkFromFullscreen(this, category);
     }
 
     @Override
@@ -503,7 +503,14 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
     }
 
     @Override
-    public void onFromFullscreenFinished() {
+    public void onFromFullscreenFinished(int category) {
+        switch (category) {
+            case CategoryConstants.CATEGORY_GESCHICHTE:
+                geschichteFragment.resetFragment();
 
+                break;
+            case CategoryConstants.CATEGORY_PRODUKTE:
+                break;
+        }
     }
 }

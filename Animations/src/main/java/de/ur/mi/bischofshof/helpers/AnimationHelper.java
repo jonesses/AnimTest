@@ -125,7 +125,7 @@ public class AnimationHelper {
 
     }
 
-    public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener) {
+    public static void startTransitionFromFullscreenAnimation(ImageView backgroundCircle, final OnAnimationListener animatorListener, final int category) {
 
         // ObjectAnimator backgroundMove = ObjectAnimator.ofFloat(backgroundCircle, "translationX", 600f);
         ObjectAnimator backgroundScaleX = ObjectAnimator.ofFloat(backgroundCircle, "scaleX", 3f);
@@ -147,7 +147,7 @@ public class AnimationHelper {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                animatorListener.onFromFullscreenFinished();
+                animatorListener.onFromFullscreenFinished(category);
             }
 
             @Override

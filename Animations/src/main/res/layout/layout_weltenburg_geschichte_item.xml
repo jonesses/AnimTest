@@ -43,10 +43,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/weltenburg_geschichte_year"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_margin="20dp"
+            android:overScrollMode="never"
             android:background="@drawable/round"
             android:scrollbars="none" >
 

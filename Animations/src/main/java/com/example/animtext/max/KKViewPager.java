@@ -275,9 +275,9 @@ public class KKViewPager extends ViewPager {
 		event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 50, mCenterY, 0);
 		this.dispatchTouchEvent(event);
 		event.recycle();*/	
-		MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_DOWN, 1200, 100, 0);
+		MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_DOWN, 1400, 100, 0);
 		MotionEvent motionEvent2 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_MOVE, 200, 100, 0);
-		MotionEvent motionEvent3 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_UP, 1200, 100, 0);
+		MotionEvent motionEvent3 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 100, MotionEvent.ACTION_UP, 1400, 100, 0);
 		this.dispatchTouchEvent(motionEvent);
 		this.dispatchTouchEvent(motionEvent2);
 		this.dispatchTouchEvent(motionEvent3);

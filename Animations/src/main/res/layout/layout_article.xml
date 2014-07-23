@@ -10,7 +10,7 @@
         android:layout_below="@+id/articleSubHeader"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:scaleType="matrix" />
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/articleContent"

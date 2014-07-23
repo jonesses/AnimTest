@@ -17,17 +17,17 @@
 
         <LinearLayout
             android:id="@+id/container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:orientation="horizontal"
                 android:paddingLeft="30dp"
                 android:paddingTop="10dp"
-                android:gravity="right"
                 android:weightSum="4">
 
                 <ImageButton
@@ -66,11 +66,17 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/hike_icon" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/button_background" />
+
+            <FrameLayout
+                android:id="@+id/ausflug_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

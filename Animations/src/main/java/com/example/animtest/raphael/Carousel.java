@@ -24,7 +24,7 @@ import de.ur.mi.ux.weltenburg.fragments.BischofshofApplikation;
 
 
 public class Carousel extends CarouselSpinner implements GestureDetector.OnGestureListener {
-    private int mAnimationDuration = 200;    
+    private int mAnimationDuration = 200;
 	private Camera mCamera = new Camera();    	
     private int mDownTouchPosition;
     private View mDownTouchView;
@@ -33,7 +33,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
     private int mGravity;
     private boolean mShouldCallbackOnUnselectedItemClick = true;
     private boolean mShouldStopFling;
-    private float mTheta = (float)(15.0f*(Math.PI/180.0));	
+    private float mTheta = (float)(40f*(Math.PI/180.0));
     private boolean moving = false;
     private boolean scrollingLeft = false;    
     private int selectedPosition = 0;
@@ -237,14 +237,15 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
 	public void onShowPress(MotionEvent e) {
 	}		
 	
-    private void Calculate3DPosition(CarouselItem child, int diameter, float angleOffset){    	
+    private void Calculate3DPosition(CarouselItem child, int diameter, float angleOffset){
+        float newDiameter = diameter * 1.5f;
     	angleOffset = angleOffset * (float)(Math.PI/180.0f);    	
-    	float x = - (float)(diameter/2  * android.util.FloatMath.sin(angleOffset)) + diameter/2 - child.getWidth()/2;
-    	float z = diameter/2 * (1.0f - (float)android.util.FloatMath.cos(angleOffset));
+    	float x = - (float)(newDiameter/2  * android.util.FloatMath.sin(angleOffset)) + newDiameter/2 - child.getWidth()/2;
+    	float z = newDiameter/2 * (1.0f - (float)android.util.FloatMath.cos(angleOffset));
     	float y = - getHeight()/2 + (float) (z * android.util.FloatMath.sin(mTheta));
-    	child.setItemX(x);
+    	child.setItemX(x - newDiameter / 6);
     	child.setItemZ(z);
-    	child.setItemY(y+150);   
+    	child.setItemY(y+250);
     }
     	
     private int calculateTop(View child, boolean duringLayout) {

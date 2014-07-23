@@ -17,6 +17,8 @@
 
         <ListView
             android:id="@+id/articleLayout_aktuelles"
+            android:overScrollMode="never"
+            android:listSelector="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="7dp"

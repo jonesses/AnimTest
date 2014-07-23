@@ -64,8 +64,8 @@ public class BackgroundCircleFragment extends Fragment {
 
     }
 
-    public void shrinkFromFullscreen(OnAnimationListener listener){
-        AnimationHelper.startTransitionFromFullscreenAnimation(backgroundCircle, listener);
+    public void shrinkFromFullscreen(OnAnimationListener listener, int category){
+        AnimationHelper.startTransitionFromFullscreenAnimation(backgroundCircle, listener, category);
     }
 
 
