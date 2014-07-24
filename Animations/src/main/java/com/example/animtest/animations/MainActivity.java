@@ -88,7 +88,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         setContentView(R.layout.activity_main);
         initManagers();
         referenceClasses();
-        getLogos();
         getWeltenburgData();
         initUI();
 
@@ -322,9 +321,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         //Geschichte
         weltenburg_geschichte = getGeschichte(this.getString(R.string.weltenburg_geschichte));
         app.setWeltenburgGeschichte(weltenburg_geschichte);
-        //Auf nach Weltenburg - Logos
-        weltenburg_aufNachWeltenburg_logos = getLogos(this.getString(R.string.weltenburg_aufNachWeltenburg_Logos));
-        app.setWeltenburgAufNachWeltenburgLogos(weltenburg_aufNachWeltenburg_logos);
         //Auf nach Weltenburg - Rad
         weltenburg_route = getGeneralContent(this.getString(R.string.weltenburg_aufNachWeltenburg_Rad));
         app.setWeltenburgAufNachWeltenburgRad(weltenburg_route);
@@ -339,27 +335,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         app.setWeltenburgAufNachWeltenburgSchiff(weltenburg_route);
     }
 
-    private ArrayList<Logos> getLogos(String string) {
-        ArrayList<Logos> logos = new ArrayList<Logos>();
-        ArrayList<BitmapItem> bitmapItems;
-        Bitmap currentBitmap;
-        ArrayList<StringItem> deTextItems;
-
-        bitmapItems = classes.getLogos(string, this);
-        deTextItems = classes.getTextItems(string + this.getString(R.string.de), this);
-
-        for (int i = 0; i < deTextItems.size(); i++) {
-            currentBitmap = null;
-            for (int m = 0; m < bitmapItems.size(); m++) {
-                if (bitmapItems.get(m).getId().equals(deTextItems.get(i).getId())) {
-                    currentBitmap = bitmapItems.get(m).getBitmap();
-                }
-            }
-            logos.add(new Logos(currentBitmap, deTextItems.get(i).getStringItem()));
-        }
-
-        return logos;
-    }
 
     private ArrayList<Geschichte> getGeschichte(String string) {
         ArrayList<Geschichte> geschichte = new ArrayList<Geschichte>();
@@ -466,10 +441,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentInteract
         weltenburg_produkte = new ArrayList<Produkte>();
     }
 
-    private void getLogos() {
-        weltenburg_logo = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + this.getString(R.string.weltenburg_logo));
-        app.setWeltenburgLogo(weltenburg_logo);
-    }
 
     @Override
     public void onToFullscreenStarted() {

@@ -21,10 +21,10 @@
     <string name="weltenburg_aktuelles">/Bischofshof/Weltenburg/Aktuelles/</string>
     <string name="weltenburg_aufNachWeltenburg">/Bischofshof/Weltenburg/AufNachWeltenburg/</string>
     <string name="weltenburg_aufNachWeltenburg_Logos">/Bischofshof/Weltenburg/AufNachWeltenburg/logos/</string>
-    <string name="weltenburg_aufNachWeltenburg_Auto">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/auto/</string>
-    <string name="weltenburg_aufNachWeltenburg_Fuss">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/fuss/</string>
-    <string name="weltenburg_aufNachWeltenburg_Rad">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/rad/</string>
-    <string name="weltenburg_aufNachWeltenburg_Schiff">/Bischofshof/Weltenburg/AufNachWeltenburg/routen/schiff/</string>
+    <string name="weltenburg_aufNachWeltenburg_Auto">/Bischofshof/Weltenburg/AufNachWeltenburg/auto/</string>
+    <string name="weltenburg_aufNachWeltenburg_Fuss">/Bischofshof/Weltenburg/AufNachWeltenburg/fuss/</string>
+    <string name="weltenburg_aufNachWeltenburg_Rad">/Bischofshof/Weltenburg/AufNachWeltenburg/rad/</string>
+    <string name="weltenburg_aufNachWeltenburg_Schiff">/Bischofshof/Weltenburg/AufNachWeltenburg/schiff/</string>
     <string name="weltenburg_geschichte">/Bischofshof/Weltenburg/Geschichte/Geschichte/</string>
     <string name="weltenburg_geschichte_allgemeines">/Bischofshof/Weltenburg/Geschichte/Allgemeines/</string>
     <string name="weltenburg_produkte">/Bischofshof/Weltenburg/Produkte/Produkte/</string>
