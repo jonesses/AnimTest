@@ -105,15 +105,15 @@ public class WeltenburgGeschichteFragment extends android.support.v4.app.Fragmen
         fontBold = Typeface.createFromAsset(getActivity().getAssets(), "font/Georgia_Bold.ttf");
     }
 
-    private void scrollToPage(int currentPos, int newPos) {
+    private void scrollToPage(int currentPos, double newPos) {
         int differenz = 0;
         boolean scrollLeft = false;
 
         if (newPos > currentPos) {
-            differenz = newPos - currentPos;
+            differenz = (int)(newPos*1.3) - currentPos;
             scrollLeft = false;
         } else if (currentPos > newPos) {
-            differenz = currentPos - newPos;
+            differenz = currentPos - (int)newPos;
             scrollLeft = true;
         }
 
