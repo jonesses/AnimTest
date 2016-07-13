@@ -7,11 +7,13 @@ public class NavigationItem {
     private String title;
     private int color;
     private int category;
+    private int id;
 
-    public NavigationItem(String title, int color, int category){
+    public NavigationItem(String title, int color, int category, int id){
         this.title = title;
         this.color = color;
         this.category = category;
+        this.id = id;
     }
 
     public int getItemColor(){

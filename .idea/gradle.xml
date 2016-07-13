@@ -11,8 +11,13 @@
             <option value="C:\Users\Jonas\AndroidStudioProjects\AnimTest\Animations" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="C:\Users\Jonas\AndroidStudioProjects\AnimTest" />
+            <option value="C:\Users\Jonas\AndroidStudioProjects\AnimTest\Animations" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
 </project>
-
